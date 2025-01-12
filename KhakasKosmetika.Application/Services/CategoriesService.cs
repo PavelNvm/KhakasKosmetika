@@ -34,15 +34,16 @@ namespace KhakasKosmetika.Application.Services
         public async Task<List<Category>> GetFilledCategoriesById(string categoryId)
         {
             var temp = await _categoryRepository.GetCategoriesBySuperCatIdAsync(categoryId);
-            var rempProd = await _productRepository.GetProductsByCategoryIdAsync(categoryId);
+            var tempProd = await _productRepository.GetProductsByCategoryIdAsync(categoryId);
             List<Category> res = new List<Category>();
             foreach (var category in temp)
             {
-                foreach (var product in rempProd)
+                foreach (var product in tempProd)
                 {
                     if (product.Categories.Contains(category.Id))
                     {
                         res.Add(category);
+                        break;
                     }
                 }
             }
