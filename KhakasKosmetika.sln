@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.ConsoleApp", "KhakasKosmetika.ConsoleApp\KhakasKosmetika.ConsoleApp.csproj", "{FDA83C92-9589-4374-887D-C9979513EE1C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.XML_Importer", "KhakasKosmetika.XML_Importer\KhakasKosmetika.XML_Importer.csproj", "{8A3BEF7B-B46D-4EE9-AD80-36162F3FBE2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.Core", "KhakasKosmetika.Core\KhakasKosmetika.Core.csproj", "{09B621AA-313F-438C-B67D-30F63789CC54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.API", "KhakasKosmetika.API\KhakasKosmetika.API.csproj", "{D067454E-A117-4E97-A8D2-0B7D18A8A9D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.DataAccess", "KhakasKosmetika.DataAccess\KhakasKosmetika.DataAccess.csproj", "{EFF7F17C-3B8B-4D4A-92F3-CCF367369F7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhakasKosmetika.Application", "KhakasKosmetika.Application\KhakasKosmetika.Application.csproj", "{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDA83C92-9589-4374-887D-C9979513EE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA83C92-9589-4374-887D-C9979513EE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA83C92-9589-4374-887D-C9979513EE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA83C92-9589-4374-887D-C9979513EE1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3BEF7B-B46D-4EE9-AD80-36162F3FBE2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3BEF7B-B46D-4EE9-AD80-36162F3FBE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3BEF7B-B46D-4EE9-AD80-36162F3FBE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3BEF7B-B46D-4EE9-AD80-36162F3FBE2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B621AA-313F-438C-B67D-30F63789CC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B621AA-313F-438C-B67D-30F63789CC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B621AA-313F-438C-B67D-30F63789CC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B621AA-313F-438C-B67D-30F63789CC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D067454E-A117-4E97-A8D2-0B7D18A8A9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D067454E-A117-4E97-A8D2-0B7D18A8A9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D067454E-A117-4E97-A8D2-0B7D18A8A9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D067454E-A117-4E97-A8D2-0B7D18A8A9D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFF7F17C-3B8B-4D4A-92F3-CCF367369F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFF7F17C-3B8B-4D4A-92F3-CCF367369F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFF7F17C-3B8B-4D4A-92F3-CCF367369F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFF7F17C-3B8B-4D4A-92F3-CCF367369F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {183F13C9-A3CD-4946-BD1D-156BEDD2CB07}
+	EndGlobalSection
+EndGlobal
