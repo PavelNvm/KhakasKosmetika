@@ -34,9 +34,14 @@ services.AddDbContext<KhakasKosmetikaDbContext>(options =>
 
 services.AddScoped<ICategoryRepository, CategoryRepository>();
 services.AddScoped<IProductRepository, ProductRepository>();
-services.AddScoped<IXMLReaderService, DataReaderService>();
 services.AddScoped<ICategoriesService,CategoriesService>();
 services.AddScoped<IProductsService,ProductsService>();
+services.AddScoped<IImageRepository,ImageRepository>();
+services.AddScoped<IImageService, ImageService>();
+
+services.AddScoped<IXMLReaderService, DataReaderService>();
+
+
 
 var app = builder.Build();
 

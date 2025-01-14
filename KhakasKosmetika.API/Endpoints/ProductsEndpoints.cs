@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace KhakasKosmetika.API.Endpoints
 {
-    public static class ProductsEndpoint
+    public static class ProductsEndpoints
     {
         public static IEndpointRouteBuilder MapProductsEndpoints(this IEndpointRouteBuilder app)
         {

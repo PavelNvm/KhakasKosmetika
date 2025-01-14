@@ -19,7 +19,7 @@ namespace KhakasKosmetika.XML_Importer
         string[] files;
         public DataReaderService()
         {
-            _folderPath = "C:\\Users\\nagib\\OneDrive\\Desktop\\rabota\\000000001";
+            _folderPath = "C:\\Users\\Дарья\\Desktop\\000000001";
             files = Directory.GetFiles(_folderPath, "*.xml", SearchOption.AllDirectories);
         }
 

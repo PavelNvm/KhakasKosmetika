@@ -25,6 +25,11 @@ namespace KhakasKosmetika.Application.Services
             var res = await _categoryRepository.GetCategoryByIdAsync(categoryId);
             return res.Name;
         }
+        public async Task<Category> GetCategoryById(string categoryId)
+        {
+            var res = await _categoryRepository.GetCategoryByIdAsync(categoryId);
+            return res;
+        }
         public async Task<List<Category>> GetCategoriesDepthZero()
         {
             var res = await _categoryRepository.GetCategoriesDepthZeroAsync();

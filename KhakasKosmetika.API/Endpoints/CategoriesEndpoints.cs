@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace KhakasKosmetika.API.Endpoints
 {
-    public static class CategoryEndpoint
+    public static class CategoriesEndpoints
     {
         public static IEndpointRouteBuilder MapCategoriesEndpoints(this IEndpointRouteBuilder app)
         {
@@ -17,6 +17,7 @@ namespace KhakasKosmetika.API.Endpoints
 
             app.MapGet("getFilledCategoriesById", GetFilledCategoriesById).AllowAnonymous();
             app.MapGet("getCategoryNameById", GetCategoryNameById).AllowAnonymous();
+            app.MapGet("getCategoryById", GetCategoryById).AllowAnonymous();
             app.MapGet("getCategoriesDepthZero", GetCategoriesDepthZero).AllowAnonymous();
             return app;
         }
@@ -26,6 +27,15 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             string result = await categoriesService.GetCategoryNameById( id );
+            return Results.Ok(result);
+        }
+        private static async Task<IResult> GetCategoryById(
+            ICategoriesService categoriesService,
+            string id
+            )
+        {
+            var cat = await categoriesService.GetCategoryById(id);
+            CategoryResponse result = new CategoryResponse(cat.Id,cat.Name,cat.Depth);
             return Results.Ok(result);
         }
         private static async Task<IResult> GetCategoriesDepthZero(

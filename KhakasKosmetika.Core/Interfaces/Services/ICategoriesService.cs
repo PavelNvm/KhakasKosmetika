@@ -7,6 +7,7 @@ namespace KhakasKosmetika.Core.Interfaces.Services
         Task<string> CreateCategoryAsync(Category category);
         Task<List<Category>> GetCategoriesDepthZero();
         Task<string> GetCategoryNameById(string categoryId);
+        Task<Category> GetCategoryById(string categoryId);
         Task<List<Category>> GetFilledCategoriesById(string categoryId);
     }
 }
