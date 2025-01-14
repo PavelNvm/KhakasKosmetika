@@ -1,4 +1,5 @@
 ﻿using KhakasKosmetika.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 namespace KhakasKosmetika.API.Endpoints
@@ -19,11 +20,12 @@ namespace KhakasKosmetika.API.Endpoints
             string categoryId
             )
         {
-            string path = @$"Images\\{categoryId}.png";
-            var filePath = Path.Combine("..", "Images", $"{categoryId}.png");
+            
             var res = await imageService.GetImagebyCategoryId(categoryId);
-
-            return Results.File(res, "image/png");
+            if (res != null)
+                return Results.File(res, "image/jpg");
+            else
+                return Results.Ok(); 
         }
         
 

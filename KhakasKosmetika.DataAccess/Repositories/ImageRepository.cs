@@ -28,14 +28,14 @@ namespace KhakasKosmetika.DataAccess.Repositories
             await _context.SaveChangesAsync();
             return catId;
         }
-        public async Task<Byte[]> GetImageByCategoryIdAsync(string catId)
+        public async Task<Byte[]?> GetImageByCategoryIdAsync(string catId)
         {
             var res = await _context.Images.AsNoTracking().FirstOrDefaultAsync(p => p.CategoryId == catId);
             if (res != null)
                 return res.ImageData;
             else
-                res = await _context.Images.AsNoTracking().FirstOrDefaultAsync(p => p.CategoryId == "0");
-            return res.ImageData;
+                //res = await _context.Images.AsNoTracking().FirstOrDefaultAsync(p => p.CategoryId == "0");
+            return null;
         }
     }
 }
