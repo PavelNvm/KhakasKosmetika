@@ -5,5 +5,6 @@ namespace KhakasKosmetika.Core.Interfaces.Repositories
     {
         Task<string> AddImage(string path, string catId);
         Task<byte[]> GetImageByCategoryIdAsync(string catId);
+        Task<string> UpdateImage(string path, string catId);
     }
 }

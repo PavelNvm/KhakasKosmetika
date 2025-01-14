@@ -13,9 +13,9 @@ namespace KhakasKosmetika.Application.Services
         public ImageService(IImageRepository imageRepository,ICategoryRepository categoryRepository)
         {
             _imageRepository = imageRepository;
-            _categoryRepository = categoryRepository;
-            _folderPath = "C:\\Users\\Дарья\\Desktop\\Images";
-            //files = Directory.GetFiles(_folderPath, "*.png", SearchOption.AllDirectories);
+            //_categoryRepository = categoryRepository;
+            //_folderPath = "C:\\Users\\Дарья\\Desktop\\Images";
+            //files = Directory.GetFiles(_folderPath, "*.jpg", SearchOption.AllDirectories);
             //insertAllPictures();
         }
 
@@ -26,7 +26,7 @@ namespace KhakasKosmetika.Application.Services
             {
                 if (files.FirstOrDefault(n => n.Contains(cat.Id)) != null)
                 {
-                    _imageRepository.AddImage(files.FirstOrDefault(n => n.Contains(cat.Id)),cat.Id);
+                    _imageRepository.UpdateImage(files.FirstOrDefault(n => n.Contains(cat.Id)),cat.Id);
                 }
             }
         }

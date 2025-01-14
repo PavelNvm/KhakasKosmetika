@@ -21,6 +21,13 @@ namespace KhakasKosmetika.DataAccess.Repositories
             await _context.SaveChangesAsync();
             return catId;
         }
+        public async Task<string> UpdateImage(string path, string catId)
+        {
+            var pic = await _context.Images.FirstOrDefaultAsync(p => p.CategoryId == catId);            
+            pic.ImageData = File.ReadAllBytes(path);
+            await _context.SaveChangesAsync();
+            return catId;
+        }
         public async Task<Byte[]> GetImageByCategoryIdAsync(string catId)
         {
             var res = await _context.Images.AsNoTracking().FirstOrDefaultAsync(p => p.CategoryId == catId);
