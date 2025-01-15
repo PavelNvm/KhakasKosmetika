@@ -14,19 +14,23 @@ namespace KhakasKosmetika.Application.Services
         {
             _imageRepository = imageRepository;
             //_categoryRepository = categoryRepository;
-            //_folderPath = "C:\\Users\\Дарья\\Desktop\\Images";
-            //files = Directory.GetFiles(_folderPath, "*.jpg", SearchOption.AllDirectories);
-            //insertAllPictures();
+            //_folderPath = "C:\\Users\\Дарья\\Desktop\\latestImages";
+            //files = Directory.GetFiles(_folderPath, "*.png", SearchOption.AllDirectories);
+            //updateImages();
         }
 
-        private void insertAllPictures()
+        private void updateImages()
         {
             var cats  = _categoryRepository.GetCategoriesDepthZeroAsync().Result;
             foreach (var cat in cats)
             {
                 if (files.FirstOrDefault(n => n.Contains(cat.Id)) != null)
                 {
-                    _imageRepository.UpdateImage(files.FirstOrDefault(n => n.Contains(cat.Id)),cat.Id);
+                    var temp = _imageRepository.GetImageByCategoryIdAsync(cat.Id).Result;
+                    if (temp != null)
+                        _imageRepository.UpdateImage(files.FirstOrDefault(n => n.Contains(cat.Id)), cat.Id);
+                    else
+                        _imageRepository.AddImage(files.FirstOrDefault(n => n.Contains(cat.Id)), cat.Id);
                 }
             }
         }
