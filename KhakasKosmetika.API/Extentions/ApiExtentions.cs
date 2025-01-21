@@ -9,6 +9,7 @@ namespace KhakasKosmetika.API.Extentions
             app.MapProductsEndpoints();
             app.MapCategoriesEndpoints();
             app.MapImagesEndpoints();
+            app.MapFavouriteProductsEndpoints();
 
 
         }

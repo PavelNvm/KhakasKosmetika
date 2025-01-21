@@ -7,6 +7,7 @@ using KhakasKosmetika.DataAccess.Repositories;
 using KhakasKosmetika.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using KhakasKosmetika.DataAccess.Entities;
 
 
 
@@ -34,7 +35,7 @@ using Microsoft.Extensions.Options;
 
 ////var result = doc.FirstChild;
 IXMLReaderService reader = new DataReaderService();
-var cats =reader.ReadCategories();
+var cats = reader.ReadCategories();
 //var a =reader.ReadMeasurementUnits();
 //var b = reader.ReadPriceTypes();
 var a1 = reader.ReadProducts();
@@ -58,6 +59,8 @@ var f = catserv.GetCategoriesDepthZero();
 var f1 = productRep.GetProductsByCategoryIdAsync("4d49d696-39c6-4f26-abde-7dd21ae50563");
 //productRep.GetSingleProductByIdAsync("");
 var b1 = 1;
+
+
 
 
 

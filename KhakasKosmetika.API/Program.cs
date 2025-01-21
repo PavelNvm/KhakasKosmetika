@@ -31,7 +31,9 @@ services.AddDbContext<KhakasKosmetikaDbContext>(options =>
 {
     options.UseSqlite(configuration.GetConnectionString(nameof(KhakasKosmetikaDbContext)));
 });
-
+services.AddScoped<IUserRepository,UserRepository>();
+services.AddScoped<IUserService,UserService>();
+services.AddScoped<IFavouriteProductsRepository,FavouriteProductsRepository>();
 services.AddScoped<ICategoryRepository, CategoryRepository>();
 services.AddScoped<IProductRepository, ProductRepository>();
 services.AddScoped<ICategoriesService,CategoriesService>();

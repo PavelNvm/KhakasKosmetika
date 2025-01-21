@@ -14,11 +14,6 @@ namespace KhakasKosmetika.API.Endpoints
 
             app.MapGet("getProductsByCategoryId", GetProductsByCategoryId).AllowAnonymous();
             app.MapGet("getSingleProductById", GetSingleProductById).AllowAnonymous();
-
-
-
-
-
             return app;
         }
         
