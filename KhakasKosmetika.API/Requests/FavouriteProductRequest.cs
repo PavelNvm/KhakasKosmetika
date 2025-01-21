@@ -1,6 +1,6 @@
 ﻿namespace KhakasKosmetika.API.Requests
 {
-    public class AddFavouriteProductRequest
+    public class FavouriteProductRequest
     {
         public string ProductId { get; set; }
     }

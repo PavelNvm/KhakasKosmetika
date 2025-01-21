@@ -14,10 +14,14 @@ namespace KhakasKosmetika.DataAccess.Repositories
         }
         public async Task<string> CreateEntryAsync(Guid userId, string productId)
         {
-            var id = Guid.NewGuid();
-            await _context.FavouriteProducts.AddAsync(new Entities.FavouriteProductEntity() { Id = id, UserId = userId, ProductId = productId });
-            await _context.SaveChangesAsync();
-            return id.ToString();
+            if (!await _context.FavouriteProducts.AnyAsync(o => o.UserId == userId && o.ProductId == productId))
+            {
+                var id = Guid.NewGuid();
+                await _context.FavouriteProducts.AddAsync(new Entities.FavouriteProductEntity() { Id = id, UserId = userId, ProductId = productId });
+                await _context.SaveChangesAsync();
+                return id.ToString();
+            }
+            else return (await _context.FavouriteProducts.FirstOrDefaultAsync(o => o.UserId == userId && o.ProductId == productId)).Id.ToString();
         }
         public async Task<List<FavouriteProduct>> GetEntries(Guid userId)
         {

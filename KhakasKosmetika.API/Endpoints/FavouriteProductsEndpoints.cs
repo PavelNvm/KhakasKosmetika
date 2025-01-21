@@ -15,6 +15,7 @@ namespace KhakasKosmetika.API.Endpoints
         {
             app.MapPost("addFavouriteProduct", AddFavouriteProduct).AllowAnonymous();
             app.MapGet("getFavouriteProducts", GetFavouriteProducts).AllowAnonymous();
+            app.MapDelete("deleteFavouriteProduct", DeleteFavouriteProduct).AllowAnonymous();
 
 
 
@@ -23,7 +24,7 @@ namespace KhakasKosmetika.API.Endpoints
         private static async Task<IResult> AddFavouriteProduct(
             IProductsService productsService,
             IUserService userService,
-            [FromBody] AddFavouriteProductRequest request,
+            [FromBody] FavouriteProductRequest request,
             HttpContext context)
         {
             var cookies = context.Request.Cookies;
@@ -65,28 +66,29 @@ namespace KhakasKosmetika.API.Endpoints
             }
         }
 
-        private static async Task<IResult> GetMessage(
+        private static async Task<IResult> DeleteFavouriteProduct(
             IProductsService productsService,
-            ICategoriesService categoriesService,
+            [FromBody] FavouriteProductRequest request,
             HttpContext context)
         {
 
-            context.Response.Cookies.Append("userInfo", "123");
-            string mes = "succes";
+            var cookies = context.Request.Cookies;
+            if (!cookies.ContainsKey("smewapiq")) //New user
+            {
+                return Results.Ok();
 
-            return Results.Ok(mes);
+            }
+            else // Existing user
+            {
+                string userId;
+                cookies.TryGetValue("userId", out userId);
+                var res = await productsService.DeleteSingleEntryAsync(userId, request.ProductId);
+                return Results.Ok();
+            }
+
         }
 
-        private static async Task<IResult> GetInfo(
-            IProductsService productsService,
-            ICategoriesService categoriesService,
-            HttpContext context)
-        {
-            var res = context.Request.Cookies.FirstOrDefault(o=>o.Key=="userInfo").Value.ToString();
-            string mes = "succes";
-
-            return Results.Ok(res);
-        }
+        
 
 
 
