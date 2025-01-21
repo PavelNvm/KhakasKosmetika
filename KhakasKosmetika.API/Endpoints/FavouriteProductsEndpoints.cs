@@ -1,8 +1,10 @@
-﻿using KhakasKosmetika.API.Responses;
+﻿using KhakasKosmetika.API.Requests;
+using KhakasKosmetika.API.Responses;
 using KhakasKosmetika.Application.Services;
 using KhakasKosmetika.Core.Interfaces.Services;
 using KhakasKosmetika.Core.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KhakasKosmetika.API.Endpoints
@@ -11,7 +13,7 @@ namespace KhakasKosmetika.API.Endpoints
     {
         public static IEndpointRouteBuilder MapFavouriteProductsEndpoints(this IEndpointRouteBuilder app)
         {
-            app.MapGet("addFavouriteProduct", AddFavouriteProduct).AllowAnonymous();
+            app.MapPost("addFavouriteProduct", AddFavouriteProduct).AllowAnonymous();
             app.MapGet("getFavouriteProducts", GetFavouriteProducts).AllowAnonymous();
 
 
@@ -21,7 +23,7 @@ namespace KhakasKosmetika.API.Endpoints
         private static async Task<IResult> AddFavouriteProduct(
             IProductsService productsService,
             IUserService userService,
-            string productId,
+            [FromBody] AddFavouriteProductRequest request,
             HttpContext context)
         {
             var cookies = context.Request.Cookies;
@@ -29,16 +31,16 @@ namespace KhakasKosmetika.API.Endpoints
             {
                 context.Response.Cookies.Append("smewapiq", "true");
                 var userId = await userService.PartialyCreateUserAsync();
-                await productsService.AddFavouriteProductAsync(userId.ToString(), productId);
+                var res = await productsService.AddFavouriteProductAsync(userId.ToString(), request.ProductId);
                 context.Response.Cookies.Append("userId", userId.ToString());
-                return Results.Ok();
+                return Results.Ok(res);
             }
             else // Existing user
             {
                 string userId;
                 cookies.TryGetValue("userId", out userId);
-                await productsService.AddFavouriteProductAsync(userId.ToString(), productId);
-                return Results.Ok();
+                var res = await productsService.AddFavouriteProductAsync(userId.ToString(), request.ProductId);
+                return Results.Ok(res);
             }
         }
 
