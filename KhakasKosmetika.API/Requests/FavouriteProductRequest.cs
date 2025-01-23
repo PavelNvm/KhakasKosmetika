@@ -2,6 +2,7 @@
 {
     public class FavouriteProductRequest
     {
-        public string ProductId { get; set; }
+        public string productId { get; set; }
+        public string userId { get; set; }
     }
 }

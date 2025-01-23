@@ -23,47 +23,25 @@ namespace KhakasKosmetika.API.Endpoints
         }
         private static async Task<IResult> AddFavouriteProduct(
             IProductsService productsService,
-            IUserService userService,
-            [FromBody] FavouriteProductRequest request,
-            HttpContext context)
+            [FromBody] FavouriteProductRequest request
+            )
         {
-            var cookies = context.Request.Cookies;
-            if (!cookies.ContainsKey("smewapiq") ) //New user
-            {
-                context.Response.Cookies.Append("smewapiq", "true");
-                var userId = await userService.PartialyCreateUserAsync();
-                var res = await productsService.AddFavouriteProductAsync(userId.ToString(), request.ProductId);
-                context.Response.Cookies.Append("userId", userId.ToString());
-                return Results.Ok(res);
-            }
-            else // Existing user
-            {
-                string userId;
-                cookies.TryGetValue("userId", out userId);
-                var res = await productsService.AddFavouriteProductAsync(userId.ToString(), request.ProductId);
-                return Results.Ok(res);
-            }
+            var res = await productsService.AddFavouriteProductAsync(request.userId, request.productId);
+            return Results.Ok(res);
         }
 
 
 
         private static async Task<IResult> GetFavouriteProducts(
             IProductsService productsService,
-            HttpContext context)
+            string userId
+            //[FromBody] FavouriteProductRequest request
+            )
         {
-            var cookies = context.Request.Cookies;
-            if (!cookies.ContainsKey("smewapiq")) //New user
-            {
-                return Results.Ok();
-            }
-            else // Existing user
-            {
-                string userId;
-                cookies.TryGetValue("userId", out userId);
-                var Products = await productsService.GetFavouriteProductsAsync(userId);
-                IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink));
-                return Results.Ok(result);
-            }
+            var Products = await productsService.GetFavouriteProductsAsync(userId);
+            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink));
+            return Results.Ok(result);
+
         }
 
         private static async Task<IResult> DeleteFavouriteProduct(
@@ -82,17 +60,9 @@ namespace KhakasKosmetika.API.Endpoints
             {
                 string userId;
                 cookies.TryGetValue("userId", out userId);
-                var res = await productsService.DeleteSingleEntryAsync(userId, request.ProductId);
+                var res = await productsService.DeleteSingleEntryAsync(userId, request.productId);
                 return Results.Ok();
             }
-
         }
-
-        
-
-
-
-
-
     }
 }

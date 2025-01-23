@@ -60,9 +60,10 @@ namespace KhakasKosmetika.DataAccess.Repositories
                 {
                     _context.FavouriteProducts.Remove(entry);
                 }
-            }
+            }            
             await _context.SaveChangesAsync();
             return productId;
         }
+        
     }
 }
