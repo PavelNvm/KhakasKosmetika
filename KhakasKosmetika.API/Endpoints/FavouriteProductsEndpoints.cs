@@ -6,6 +6,7 @@ using KhakasKosmetika.Core.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Net;
 
 namespace KhakasKosmetika.API.Endpoints
 {
@@ -46,23 +47,11 @@ namespace KhakasKosmetika.API.Endpoints
 
         private static async Task<IResult> DeleteFavouriteProduct(
             IProductsService productsService,
-            [FromBody] FavouriteProductRequest request,
-            HttpContext context)
-        {
-
-            var cookies = context.Request.Cookies;
-            if (!cookies.ContainsKey("smewapiq")) //New user
-            {
-                return Results.Ok();
-
-            }
-            else // Existing user
-            {
-                string userId;
-                cookies.TryGetValue("userId", out userId);
-                var res = await productsService.DeleteSingleEntryAsync(userId, request.productId);
-                return Results.Ok();
-            }
+            [FromBody] FavouriteProductRequest request
+            )
+        {            
+            var res = await productsService.DeleteSingleEntryAsync(request.userId, request.productId);
+            return Results.Ok();
         }
     }
 }
