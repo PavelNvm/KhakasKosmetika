@@ -17,18 +17,18 @@ namespace KhakasKosmetika.DataAccess.Repositories
         }
         //CRUD
 
-        public async Task<string> AddEntryAsync(Guid userId, string productId)
+        public async Task<Guid> AddEntryAsync(Guid userId, string productId)
         {
-            if (!await _context.ProductsInBasket.AnyAsync(o => o.UserId == userId && o.ProductId == productId))
+            var prod = await _context.ProductsInBasket.FirstOrDefaultAsync(o => o.UserId == userId && o.ProductId == productId);
+            if (prod==null)
             {
                 var id = Guid.NewGuid();
                 await _context.ProductsInBasket.AddAsync(new Entities.ProductInBasketEntity() { Id = id, UserId = userId, ProductId = productId,Amount=1 });
                 await _context.SaveChangesAsync();
-                return id.ToString();
+                return id;
             }
             else
-            {
-                var prod = await _context.ProductsInBasket.FirstOrDefaultAsync(o => o.UserId == userId && o.ProductId == productId);
+            { 
                 prod.Amount++;
                 return prod.Id;
             }
@@ -38,15 +38,16 @@ namespace KhakasKosmetika.DataAccess.Repositories
             var res = await _context.ProductsInBasket.AsNoTracking().Where(o => o.UserId == userId).Select(o => new FavouriteProduct(o.Id, o.UserId, o.ProductId)).ToListAsync();
             return res;
         }
-        public async Task<string> DeleteSingleEntry(Guid userId, string productId)
+        public async Task<Guid> DeleteSingleEntry(Guid userId, string productId)
         {
             var ent = await _context.ProductsInBasket.FirstOrDefaultAsync(o => o.UserId == userId && o.ProductId == productId);
             if (ent != null)
             {
                 _context.ProductsInBasket.Remove(ent);
                 await _context.SaveChangesAsync();
+                return ent.Id;
             }
-            return ent.Id.ToString();
+            return Guid.Empty;
         }
         public async Task<string> DeleteEntriesByUserId(Guid userId)
         {

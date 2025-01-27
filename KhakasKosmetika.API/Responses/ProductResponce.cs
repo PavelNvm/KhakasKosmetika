@@ -8,6 +8,10 @@ namespace KhakasKosmetika.API.Responses
         string name,
         string price,
         string description,
-        string imageUrl
+        string imageUrl,
+        int amountOfImages,
+        bool isFavourite,
+        bool isInBasket,
+        int amountInBasket
     );
 }

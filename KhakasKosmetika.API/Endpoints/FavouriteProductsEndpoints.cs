@@ -17,9 +17,6 @@ namespace KhakasKosmetika.API.Endpoints
             app.MapPost("addFavouriteProduct", AddFavouriteProduct).AllowAnonymous();
             app.MapGet("getFavouriteProducts", GetFavouriteProducts).AllowAnonymous();
             app.MapDelete("deleteFavouriteProduct", DeleteFavouriteProduct).AllowAnonymous();
-
-
-
             return app;
         }
         private static async Task<IResult> AddFavouriteProduct(
@@ -40,7 +37,7 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             var Products = await productsService.GetFavouriteProductsAsync(userId);
-            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink));
+            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink, 1, true, false, 0));
             return Results.Ok(result);
 
         }

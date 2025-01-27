@@ -1,4 +1,5 @@
 ﻿using KhakasKosmetika.API.Responses;
+using KhakasKosmetika.Core.Interfaces.Repositories;
 using KhakasKosmetika.Core.Interfaces.Services;
 using System.Linq;
 
@@ -18,22 +19,39 @@ namespace KhakasKosmetika.API.Endpoints
         }
         
         private static async Task<IResult> GetProductsByCategoryId(
-            IProductsService productsService,
+            IProductsService productsService,            
             string categoryId,
+            string userId,
             int amount = 10
             )
         {
             var Products = await productsService.GetProductsByCategoryIdAsync(categoryId);
-            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink));
+            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink,1,false,false,0));
+            var favProds = await productsService.GetFavouriteProductsAsync(userId);
+            foreach (var product in favProds)
+            {
+                var temp = result.FirstOrDefault(o => o.id == product.Id);
+                if (temp != null)
+                {
+                    temp = temp with { isFavourite = true };
+                }
+            }
             return Results.Ok(result);
         }
         private static async Task<IResult> GetSingleProductById(
             IProductsService productsService,
+            string userId,
             string Id
             )
         {
             var Product = await productsService.GetSingleProductByIdAsync(Id);
-            ProductResponce result = new ProductResponce(Product.Id, Product.Name, Product.PriceFull, "Описание отсутствует", Product.PhotoLink);
+            bool isFav=false;
+            var a = await productsService.GetFavouriteProductsAsync(userId);
+            if (a != null)
+            {
+                isFav = true;
+            }
+            ProductResponce result = new ProductResponce(Product.Id, Product.Name, Product.PriceFull, "Описание отсутствует", Product.PhotoLink, 1, isFav, false, 0);
             return Results.Ok(result);
         }
 
@@ -44,7 +62,7 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             var Products = await ReaderService.ReadProducts();
-            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink));
+            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink, 1, false, false, 0));
             return Results.Ok(result);
         }
         private static List<string> Unglue(string gluedString)
