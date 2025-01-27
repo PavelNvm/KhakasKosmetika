@@ -8,7 +8,7 @@ namespace KhakasKosmetika.Core.Models
 {
     public class FavouriteProduct
     {
-        public FavouriteProduct(Guid id, Guid userId, string productId)
+        private FavouriteProduct(Guid id, Guid userId, string productId)
         {
             Id = id;
             UserId = userId;
@@ -17,5 +17,10 @@ namespace KhakasKosmetika.Core.Models
         public Guid Id { get; }
         public Guid UserId { get; }
         public string ProductId { get; }
+        public static FavouriteProduct Create(Guid id, Guid userId, string productId)
+        {
+            return new FavouriteProduct(id, userId, productId);
+        }
     }
+    
 }

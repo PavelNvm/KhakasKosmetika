@@ -25,7 +25,7 @@ namespace KhakasKosmetika.DataAccess.Repositories
         }
         public async Task<List<FavouriteProduct>> GetEntries(Guid userId)
         {
-            var res = await _context.FavouriteProducts.AsNoTracking().Where(o => o.UserId == userId).Select(o => new FavouriteProduct(o.Id, o.UserId, o.ProductId)).ToListAsync();
+            var res = await _context.FavouriteProducts.AsNoTracking().Where(o => o.UserId == userId).Select(o => FavouriteProduct.Create(o.Id, o.UserId, o.ProductId)).ToListAsync();
             return res;
         }
         public async Task<string> DeleteSingleEntry(Guid userId, string productId)

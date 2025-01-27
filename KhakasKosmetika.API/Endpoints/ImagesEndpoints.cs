@@ -21,7 +21,7 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             
-            var res = await imageService.GetImagebyCategoryId(categoryId);
+            var res = await imageService.GetImagebyCategoryIdAsync(categoryId);
             if (res != null)
                 return Results.File(res, "image/jpg");
             else

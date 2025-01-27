@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KhakasKosmetika.DataAccess.Entities
+﻿namespace KhakasKosmetika.DataAccess.Entities
 {
     public class ProductInBasketEntity
     {
@@ -12,5 +6,12 @@ namespace KhakasKosmetika.DataAccess.Entities
         public Guid UserId { get; set; }
         public string ProductId { get; set; }
         public int Amount { get; set; }
+        public ProductInBasketEntity(Guid id, Guid userId, string productId, int amount)
+        {
+            Id = id;
+            UserId = userId;
+            ProductId = productId;
+            Amount = amount;
+        }
     }
 }

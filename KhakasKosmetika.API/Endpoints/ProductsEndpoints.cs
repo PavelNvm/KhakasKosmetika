@@ -1,6 +1,7 @@
 ﻿using KhakasKosmetika.API.Responses;
 using KhakasKosmetika.Core.Interfaces.Repositories;
 using KhakasKosmetika.Core.Interfaces.Services;
+using KhakasKosmetika.Core.Models;
 using System.Linq;
 
 namespace KhakasKosmetika.API.Endpoints
@@ -26,16 +27,10 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             var Products = await productsService.GetProductsByCategoryIdAsync(categoryId);
-            IEnumerable<ProductResponce> result = Products.Select(c => new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink,1,false,false,0));
             var favProds = await productsService.GetFavouriteProductsAsync(userId);
-            foreach (var product in favProds)
-            {
-                var temp = result.FirstOrDefault(o => o.id == product.Id);
-                if (temp != null)
-                {
-                    temp = temp with { isFavourite = true };
-                }
-            }
+
+            IEnumerable<ProductResponce> result = Products.Select(c => 
+            new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink,1,favProds.FirstOrDefault(o => o.Id == c.Id)!=null,false,0));
             return Results.Ok(result);
         }
         private static async Task<IResult> GetSingleProductById(
@@ -44,14 +39,8 @@ namespace KhakasKosmetika.API.Endpoints
             string Id
             )
         {
-            var Product = await productsService.GetSingleProductByIdAsync(Id);
-            bool isFav=false;
-            var a = await productsService.GetFavouriteProductsAsync(userId);
-            if (a != null)
-            {
-                isFav = true;
-            }
-            ProductResponce result = new ProductResponce(Product.Id, Product.Name, Product.PriceFull, "Описание отсутствует", Product.PhotoLink, 1, isFav, false, 0);
+            var Product = await productsService.GetSingleProductByIdAsync(Id);            
+            ProductResponce result = new ProductResponce(Product.Id, Product.Name, Product.PriceFull, "Описание отсутствует", Product.PhotoLink, 1, (await productsService.GetFavouriteProductsAsync(userId)).FirstOrDefault(o => o.Id == Product.Id)!=null, false, 0);
             return Results.Ok(result);
         }
 

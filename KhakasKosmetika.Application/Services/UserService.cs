@@ -21,7 +21,7 @@ namespace KhakasKosmetika.Application.Services
             var id = await _userRepository.PartialyCreateUserAsync();
             return id;
         }
-        public async Task<User> RegisterExistingUser(
+        public async Task<User> RegisterExistingUserAsync(
             Guid id,
             string userName,
             string passwordHash,
@@ -41,7 +41,7 @@ namespace KhakasKosmetika.Application.Services
                 ));
             return user;
         }
-        public async Task<User> RegisterNewUser(
+        public async Task<User> RegisterNewUserAsync(
             string userName,
             string passwordHash,
             string email,

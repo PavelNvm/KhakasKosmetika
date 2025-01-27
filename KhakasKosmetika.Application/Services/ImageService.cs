@@ -34,7 +34,7 @@ namespace KhakasKosmetika.Application.Services
                 }
             }
         }
-        public async Task<byte[]> GetImagebyCategoryId(string catId)
+        public async Task<byte[]> GetImagebyCategoryIdAsync(string catId)
         {
             
             var res = await _imageRepository.GetImageByCategoryIdAsync(catId);
