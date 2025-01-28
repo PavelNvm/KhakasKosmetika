@@ -8,9 +8,9 @@ namespace KhakasKosmetika.API.Endpoints
 {
     public static class BasketEndpoints
     {
-        public static IEndpointRouteBuilder MapBasketEndpointsEndpoints(this IEndpointRouteBuilder app)
+        public static IEndpointRouteBuilder MapBasketEndpoints(this IEndpointRouteBuilder app)
         {
-            app.MapPost("addProductinBasket", AddProductinBasketAsync).AllowAnonymous();
+            app.MapPost("addProductInBasket", AddProductinBasketAsync).AllowAnonymous();
             app.MapGet("getBasketByUserId", GetBasketByUserId).AllowAnonymous();
             app.MapDelete("deleteProductFromBasket", DeleteProductFromBasket).AllowAnonymous();
             return app;
