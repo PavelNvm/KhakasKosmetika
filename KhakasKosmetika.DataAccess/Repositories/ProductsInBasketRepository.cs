@@ -27,6 +27,7 @@ namespace KhakasKosmetika.DataAccess.Repositories
             else
             {
                 prod.Amount++;
+                await _context.SaveChangesAsync();
                 return prod.Id;
             }
         }
