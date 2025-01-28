@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using KhakasKosmetika.Core.Interfaces.Repositories;
 using KhakasKosmetika.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace KhakasKosmetika.DataAccess.Repositories
 {
@@ -34,14 +35,23 @@ namespace KhakasKosmetika.DataAccess.Repositories
             var res = await _context.ProductsInBasket.AsNoTracking().Where(o => o.UserId == userId).Select(o => ProductInBasket.Create(o.Id, o.UserId, o.ProductId,o.Amount)).ToListAsync();
             return res;
         }
-        public async Task<Guid> DeleteSingleEntryAsync(Guid userId, string productId)
+        public async Task<Guid> RemoveSingleProductAsync(Guid userId, string productId)
         {
             var ent = await _context.ProductsInBasket.FirstOrDefaultAsync(o => o.UserId == userId && o.ProductId == productId);
             if (ent != null)
             {
-                _context.ProductsInBasket.Remove(ent);
-                await _context.SaveChangesAsync();
-                return ent.Id;
+                if (ent.Amount == 1)
+                {
+                    _context.ProductsInBasket.Remove(ent);
+                    await _context.SaveChangesAsync();
+                    return ent.Id;
+                }
+                else 
+                {
+                    ent.Amount--;
+                    await _context.SaveChangesAsync();
+                    return ent.Id;
+                }
             }
             return Guid.Empty;
         }

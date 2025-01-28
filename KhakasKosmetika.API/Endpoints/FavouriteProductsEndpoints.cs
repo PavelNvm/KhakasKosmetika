@@ -21,7 +21,7 @@ namespace KhakasKosmetika.API.Endpoints
         }
         private static async Task<IResult> AddFavouriteProduct(
             IProductsService productsService,
-            [FromBody] FavouriteProductRequest request
+            [FromBody] ProductRequest request
             )
         {
             var res = await productsService.AddFavouriteProductAsync(request.userId, request.productId);
@@ -44,7 +44,7 @@ namespace KhakasKosmetika.API.Endpoints
 
         private static async Task<IResult> DeleteFavouriteProduct(
             IProductsService productsService,
-            [FromBody] FavouriteProductRequest request
+            [FromBody] ProductRequest request
             )
         {            
             var res = await productsService.DeleteSingleEntryAsync(request.userId, request.productId);

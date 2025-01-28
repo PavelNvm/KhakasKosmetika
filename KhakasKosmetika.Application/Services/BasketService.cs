@@ -1,14 +1,11 @@
 ﻿using KhakasKosmetika.Core.Interfaces.Repositories;
+using KhakasKosmetika.Core.Interfaces.Services;
 using KhakasKosmetika.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace KhakasKosmetika.Application.Services
 {
-    public class BasketService
+    public class BasketService : IBasketService
     {
         private readonly IProductsInBasketRepository _basketRepository;
         private readonly IProductRepository _productRepository;
@@ -18,17 +15,26 @@ namespace KhakasKosmetika.Application.Services
             _basketRepository = basketRepository;
             _productRepository = productRepository;
         }
-        public async Task<List<ProductInBasket>> GetBasketByUserIdAsync(Guid userId)
+        public async Task<List<(Product,int)>> GetBasketByUserIdAsync(Guid userId)
         {
-            List<ProductInBasket> basketEntries = await _basketRepository.GetEntriesAsync(userId);
-            return basketEntries;
+            var basketEntries = await _basketRepository.GetEntriesAsync(userId);
+            List<(Product, int)> products = new List<(Product, int)>();
+            foreach (var basketEntry in basketEntries)
+            {
+                products.Add((await _productRepository.GetSingleProductByIdAsync(basketEntry.ProductId),basketEntry.Amount));
+            }
+            return products;
         }
         public async Task<Guid> AddProductToBasketAsync(Guid userId, string productId)
         {
             var res = await _basketRepository.AddEntryAsync(userId, productId);
             return res;
         }
-
+        public async Task<Guid> RemoveSingleProductAsync(Guid userId, string productId)
+        {
+            var res = await _basketRepository.RemoveSingleProductAsync(userId, productId);
+            return res;
+        }
 
 
 

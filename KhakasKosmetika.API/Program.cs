@@ -33,6 +33,8 @@ services.AddDbContext<KhakasKosmetikaDbContext>(options =>
 });
 services.AddScoped<IUserRepository,UserRepository>();
 services.AddScoped<IUserService,UserService>();
+services.AddScoped<IBasketService,BasketService>();
+services.AddScoped<IProductsInBasketRepository,ProductsInBasketRepository>();
 services.AddScoped<IFavouriteProductsRepository,FavouriteProductsRepository>();
 services.AddScoped<ICategoryRepository, CategoryRepository>();
 services.AddScoped<IProductRepository, ProductRepository>();

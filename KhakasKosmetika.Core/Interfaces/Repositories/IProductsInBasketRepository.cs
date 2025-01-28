@@ -7,7 +7,7 @@ namespace KhakasKosmetika.Core.Interfaces.Repositories
         Task<Guid> AddEntryAsync(Guid userId, string productId);
         Task<string> DeleteEntriesByProductIdAsync(string productId);
         Task<string> DeleteEntriesByUserIdAsync(Guid userId);
-        Task<Guid> DeleteSingleEntryAsync(Guid userId, string productId);
+        Task<Guid> RemoveSingleProductAsync(Guid userId, string productId);
         Task<List<ProductInBasket>> GetEntriesAsync(Guid userId);
     }
 }
