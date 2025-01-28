@@ -7,5 +7,6 @@ namespace KhakasKosmetika.Core.Interfaces.Services
         Task<Guid> AddProductToBasketAsync(Guid userId, string productId);
         Task<List<(Product, int)>> GetBasketByUserIdAsync(Guid userId);
         Task<Guid> RemoveSingleProductAsync(Guid userId, string productId);
+        Task<Guid> ClearBasketByUserIdAsync(Guid userId);
     }
 }

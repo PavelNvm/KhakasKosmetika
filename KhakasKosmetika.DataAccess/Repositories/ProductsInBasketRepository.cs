@@ -55,7 +55,7 @@ namespace KhakasKosmetika.DataAccess.Repositories
             }
             return Guid.Empty;
         }
-        public async Task<string> DeleteEntriesByUserIdAsync(Guid userId)
+        public async Task<Guid> DeleteEntriesByUserIdAsync(Guid userId)
         {
             var enteties = await _context.ProductsInBasket.Where(o => o.UserId == userId).ToListAsync();
             foreach (var entry in enteties)
@@ -66,7 +66,7 @@ namespace KhakasKosmetika.DataAccess.Repositories
                 }
             }
             await _context.SaveChangesAsync();
-            return userId.ToString();
+            return userId;
         }
         public async Task<string> DeleteEntriesByProductIdAsync(string productId)
         {

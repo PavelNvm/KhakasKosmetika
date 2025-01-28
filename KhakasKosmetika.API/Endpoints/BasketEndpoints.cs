@@ -13,6 +13,7 @@ namespace KhakasKosmetika.API.Endpoints
             app.MapPost("addProductInBasket", AddProductinBasketAsync).AllowAnonymous();
             app.MapGet("getBasketByUserId", GetBasketByUserId).AllowAnonymous();
             app.MapDelete("deleteProductFromBasket", DeleteProductFromBasket).AllowAnonymous();
+            app.MapDelete("clearBasketByUserId", ClearBasketByUserId).AllowAnonymous();
             return app;
         }
         private static async Task<IResult> AddProductinBasketAsync(
@@ -46,7 +47,15 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             var res = await basketService.RemoveSingleProductAsync(Guid.Parse(request.userId), request.productId);
-            return Results.Ok();
+            return Results.Ok(res);
+        }
+        private static async Task<IResult> ClearBasketByUserId(
+            IBasketService basketService,
+            string userId
+            )
+        {
+            var res = await basketService.ClearBasketByUserIdAsync(Guid.Parse(userId)); 
+            return Results.Ok(res);
         }
     }
 }

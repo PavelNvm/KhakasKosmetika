@@ -36,7 +36,11 @@ namespace KhakasKosmetika.Application.Services
             return res;
         }
 
-
+        public async Task<Guid> ClearBasketByUserIdAsync(Guid userId)
+        {
+            var res = await _basketRepository.DeleteEntriesByUserIdAsync(userId);
+            return res;
+        }
 
 
 
