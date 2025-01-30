@@ -20,7 +20,8 @@ namespace KhakasKosmetika.API.Endpoints
         }
         
         private static async Task<IResult> GetProductsByCategoryId(
-            IProductsService productsService,            
+            IProductsService productsService,
+            IBasketService basketService,
             string categoryId,
             string userId,
             int amount = 10
@@ -28,19 +29,30 @@ namespace KhakasKosmetika.API.Endpoints
         {
             var Products = await productsService.GetProductsByCategoryIdAsync(categoryId);
             var favProds = await productsService.GetFavouriteProductsAsync(userId);
+            var basket = await basketService.GetBasketByUserIdAsync(Guid.Parse(userId));
+
 
             IEnumerable<ProductResponce> result = Products.Select(c => 
-            new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink,1,favProds.FirstOrDefault(o => o.Id == c.Id)!=null,false,0));
+            new ProductResponce(c.Id, c.Name, c.PriceFull, "Описание отсутствует", c.PhotoLink,1,
+            favProds.FirstOrDefault(o => o.Id == c.Id)!=null,
+            basket.FirstOrDefault(o => o.Item1.Id == c.Id).Item1!=null,
+            basket.FirstOrDefault(o => o.Item1.Id == c.Id).Item2));
             return Results.Ok(result);
         }
         private static async Task<IResult> GetSingleProductById(
             IProductsService productsService,
+            IBasketService basketService,
             string userId,
             string Id
             )
         {
-            var Product = await productsService.GetSingleProductByIdAsync(Id);            
-            ProductResponce result = new ProductResponce(Product.Id, Product.Name, Product.PriceFull, "Описание отсутствует", Product.PhotoLink, 1, (await productsService.GetFavouriteProductsAsync(userId)).FirstOrDefault(o => o.Id == Product.Id)!=null, false, 0);
+            var product = await productsService.GetSingleProductByIdAsync(Id);
+            var basket = await basketService.GetBasketByUserIdAsync(Guid.Parse(userId));
+            (Product, int) prodInBasket = basket.FirstOrDefault(o => o.Item1.Id == product.Id);            
+            ProductResponce result = new ProductResponce(product.Id, product.Name, product.PriceFull, "Описание отсутствует", product.PhotoLink, 1, 
+                (await productsService.GetFavouriteProductsAsync(userId)).FirstOrDefault(o => o.Id == product.Id)!=null,
+                prodInBasket.Item1!=null,
+                prodInBasket.Item2);
             return Results.Ok(result);
         }
 
