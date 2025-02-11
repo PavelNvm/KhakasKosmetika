@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace KhakasKosmetika.DataAccess.Entities
 {
-    public class FavouriteProductEntity
+    public class AddressEntity
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public string ProductId { get; set; } = "";
+        public string City { get; set; } = "";
+        public string Street { get; set; } = "";
+        public string House { get; set; } = "";
+
+
     }
 }

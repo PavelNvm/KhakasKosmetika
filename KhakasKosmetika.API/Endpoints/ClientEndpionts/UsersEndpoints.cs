@@ -2,7 +2,7 @@
 using KhakasKosmetika.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KhakasKosmetika.API.Endpoints
+namespace KhakasKosmetika.API.Endpoints.ClientEndpionts
 {
     public static class UsersEndpoints
     {
@@ -20,7 +20,7 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             var res = await userService.PartialyCreateUserAsync();
-            return Results.Ok(res.ToString()) ;
+            return Results.Ok(res.ToString());
         }
     }
 }

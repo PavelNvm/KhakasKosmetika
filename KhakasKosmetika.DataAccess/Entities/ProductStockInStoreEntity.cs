@@ -10,7 +10,7 @@ namespace KhakasKosmetika.DataAccess.Entities
     {
         public Guid Id { get; set; }
         public Guid StoreId { get; set; }
-        public string ProductId { get; set; }
-        public string Amount { get; set; }
+        public string ProductId { get; set; } = "";
+        public string Amount { get; set; } = "";
     }
 }

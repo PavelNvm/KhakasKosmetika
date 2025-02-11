@@ -76,6 +76,7 @@ namespace KhakasKosmetika.DataAccess
         public DbSet<StoreEntity> Stores { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<ImageEntity> Images { get; set; }
+        public DbSet<RatingOfProductByUserEntity> RatingOfProductByUsers { get; set; }
 
     }
 }

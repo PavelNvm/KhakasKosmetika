@@ -1,4 +1,4 @@
-﻿using KhakasKosmetika.API.Endpoints;
+﻿using KhakasKosmetika.API.Endpoints.ClientEndpionts;
 
 namespace KhakasKosmetika.API.Extentions
 {

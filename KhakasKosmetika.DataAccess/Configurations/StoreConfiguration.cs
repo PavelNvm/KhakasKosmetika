@@ -15,7 +15,7 @@ namespace KhakasKosmetika.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<StoreEntity> builder)
         {
             builder.HasKey(b => b.Id);
-            builder.Property(b => b.Coordinates).IsRequired();
+            builder.Property(b => b.Address).IsRequired();
         }
     }
 }

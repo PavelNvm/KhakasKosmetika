@@ -9,7 +9,7 @@ namespace KhakasKosmetika.DataAccess.Entities
     public class ImageEntity
     {
         public Guid Id { get; set; }
-        public string CategoryId { get; set; }
-        public byte[] ImageData { get; set; }
+        public string CategoryId { get; set; } = "";
+        public byte[] ImageData { get; set; } = [];
     }
 }

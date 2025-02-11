@@ -15,8 +15,8 @@ namespace KhakasKosmetika.DataAccess.Configurations
         {
             builder.HasKey(b => b.Id);
             builder.Property(b => b.UserId).IsRequired();
-            builder.Property(b => b.ProductId).IsRequired();
-            builder.Property(b => b.Amount).IsRequired();
+            //builder.Property(b => b.ProductId).IsRequired();
+            //builder.Property(b => b.Amount).IsRequired();
             builder.Property(b => b.PurchaseDate).IsRequired();
         }
     }

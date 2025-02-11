@@ -67,9 +67,9 @@ namespace KhakasKosmetika.Application.Services
             var res = await _favouriteProductsRepository.DeleteEntriesByProductId(productId);
             return res;
         }
-        public async Task<string> DeleteFavouriteProductsByUserIdAsync(Guid userId)
+        public async Task<string> DeleteFavouriteProductsByUserIdAsync(string userId)
         {
-            var res = await _favouriteProductsRepository.DeleteEntriesByUserId(userId);
+            var res = await _favouriteProductsRepository.DeleteEntriesByUserId(Guid.Parse(userId));
 
             return res;
         }

@@ -9,6 +9,6 @@ namespace KhakasKosmetika.DataAccess.Entities
     public class StoreEntity
     {
         public Guid Id { get; set; }
-        public string Coordinates { get; set; }
+        public Guid Address { get; set; }
     }
 }

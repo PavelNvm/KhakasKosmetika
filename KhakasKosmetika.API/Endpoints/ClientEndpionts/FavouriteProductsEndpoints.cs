@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace KhakasKosmetika.API.Endpoints
+namespace KhakasKosmetika.API.Endpoints.ClientEndpionts
 {
     public static class FavouriteProductsEndpoints
     {
@@ -46,7 +46,7 @@ namespace KhakasKosmetika.API.Endpoints
             IProductsService productsService,
             [FromBody] ProductRequest request
             )
-        {            
+        {
             var res = await productsService.DeleteSingleEntryAsync(request.userId, request.productId);
             return Results.Ok();
         }

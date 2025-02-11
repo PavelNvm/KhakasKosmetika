@@ -25,7 +25,9 @@ namespace KhakasKosmetika.Core.Models
         public int AmountOfCategories { get; set; }      //Колво групп к которым относится товар
         public string Categories { get; set; }           //Id групп разделенных ';'
         public string PhotoLink { get; set; }
+        public string Description { get; set; }
 
+        public double Rating { get; set; }
 
 
 
@@ -51,7 +53,9 @@ namespace KhakasKosmetika.Core.Models
             string deletionMarker,
             int    amountOfCategories,
             string groups,
-            string photolink
+            string photolink,
+            double rating,
+            string description
             )
         {
             return new Product(
@@ -72,7 +76,9 @@ namespace KhakasKosmetika.Core.Models
                 deletionMarker,
                 amountOfCategories,
                 groups,
-                photolink
+                photolink,
+                rating,
+                description
                 );
         }
         private Product(
@@ -93,7 +99,9 @@ namespace KhakasKosmetika.Core.Models
             string deletionMarker,
             int amountOfCategories,
             string groups,
-            string photolink
+            string photolink,
+            double rating,
+            string description
             )
         {
             Id = id;
@@ -114,6 +122,8 @@ namespace KhakasKosmetika.Core.Models
             AmountOfCategories = amountOfCategories;
             Categories = groups;
             PhotoLink = photolink;
+            Rating = rating;
+            Description = description;
         }
     }
 }

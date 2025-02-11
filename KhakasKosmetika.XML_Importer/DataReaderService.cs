@@ -14,16 +14,17 @@ namespace KhakasKosmetika.XML_Importer
 {
     public class DataReaderService : IXMLReaderService
     {
-        private readonly string _folderPath;
+        private readonly string _folderPath="";
         private XmlDocument _doc = new XmlDocument();
         string[] files;
         public DataReaderService()
         {
-            _folderPath = "C:\\Users\\Дарья\\Desktop\\000000001";
+            _folderPath = "C:\\Users\\nagib\\OneDrive\\Desktop\\HK\\000000001";
             files = Directory.GetFiles(_folderPath, "*.xml", SearchOption.AllDirectories);
+
         }
 
-        public DataReaderService(string path)
+        public DataReaderService(string path):base()
         {
             files = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
         }
@@ -134,6 +135,7 @@ namespace KhakasKosmetika.XML_Importer
         #endregion
         public async Task<List<Product>> ReadProducts()
         {
+            int counter = 0;
             List<Product> result = new List<Product>();
             foreach (string adress in files.Where(o => o.Contains("import")))
             {
@@ -155,6 +157,10 @@ namespace KhakasKosmetika.XML_Importer
                             break;
                         }
                     }
+                    if(child.ChildNodes.Item(17).InnerText!="")
+                    {
+                        counter++;
+                    }
                     result.Add(Product.Create(
                         child.ChildNodes.Item(0).InnerText,       // 0          string id,
                         child.ChildNodes.Item(4).InnerText,       // 4          string art,
@@ -173,7 +179,9 @@ namespace KhakasKosmetika.XML_Importer
                         child.ChildNodes.Item(2).InnerText,       // 2           bool deletionMarker
                         child.ChildNodes.Item(16).ChildNodes.Count,
                         GlueGroup(child.ChildNodes.Item(16)),
-                        $"https://api.hk19.ru/goods_photos/{temp.Split().FirstOrDefault()}%C2%A0{temp.Split().LastOrDefault()}.jpg" 
+                        $"https://api.hk19.ru/goods_photos/{temp.Split().FirstOrDefault()}%C2%A0{temp.Split().LastOrDefault()}.jpg",
+                        -1,
+                        child.ChildNodes.Item(17).InnerText
                         ));
                 }
             }
@@ -210,6 +218,7 @@ namespace KhakasKosmetika.XML_Importer
                 }
             }
             //TODO:СЧИТЫВАНИЕ ОСТАТКОВ
+            Console.WriteLine(counter);
             return result;
         }
         

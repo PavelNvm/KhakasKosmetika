@@ -42,7 +42,9 @@ namespace KhakasKosmetika.DataAccess.Repositories
                 result.DeletionMarker.ToString(),
                 result.AmountOfCategories,
                 result.Categories,
-                result.PhotoLink
+                result.PhotoLink,
+                result.AverageRating,
+                result.Description
                 );
         }
         public async Task<List<Product>> GetProductsByCategoryIdAsync(string catId)
@@ -68,7 +70,9 @@ namespace KhakasKosmetika.DataAccess.Repositories
                 p.DeletionMarker.ToString(),
                 p.AmountOfCategories,
                 p.Categories,
-                p.PhotoLink
+                p.PhotoLink,
+                p.AverageRating,
+                p.Description
                 ))
                 .ToListAsync();
             return result;
@@ -99,6 +103,13 @@ namespace KhakasKosmetika.DataAccess.Repositories
             await _context.Products.AddAsync(productEntity);
             await _context.SaveChangesAsync();
             return productEntity.Id;
+        }
+        public async Task<string> RateProduct(Guid userId, string productId,int rating)
+        {
+            var ratingOfProduct = new RatingOfProductByUserEntity(Guid.NewGuid(), userId, productId, rating);
+            //await _context.
+
+            return "0";
         }
 
 

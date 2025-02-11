@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 
 
-namespace KhakasKosmetika.API.Endpoints
+namespace KhakasKosmetika.API.Endpoints.ClientEndpionts
 {
     public static class ImagesEndpoints
     {
@@ -20,14 +20,14 @@ namespace KhakasKosmetika.API.Endpoints
             string categoryId
             )
         {
-            
+
             var res = await imageService.GetImagebyCategoryIdAsync(categoryId);
             if (res != null)
                 return Results.File(res, "image/jpg");
             else
-                return Results.Ok(); 
+                return Results.Ok();
         }
-        
+
 
 
 

@@ -15,9 +15,9 @@ namespace KhakasKosmetika.Application.Services
             _basketRepository = basketRepository;
             _productRepository = productRepository;
         }
-        public async Task<List<(Product,int)>> GetBasketByUserIdAsync(Guid userId)
+        public async Task<List<(Product,int)>> GetBasketByUserIdAsync(string userId)
         {
-            var basketEntries = await _basketRepository.GetEntriesAsync(userId);
+            var basketEntries = await _basketRepository.GetEntriesAsync(Guid.Parse(userId));
             List<(Product, int)> products = new List<(Product, int)>();
             foreach (var basketEntry in basketEntries)
             {
@@ -25,21 +25,21 @@ namespace KhakasKosmetika.Application.Services
             }
             return products;
         }
-        public async Task<Guid> AddProductToBasketAsync(Guid userId, string productId)
+        public async Task<string> AddProductToBasketAsync(string userId, string productId)
         {
-            var res = await _basketRepository.AddEntryAsync(userId, productId);
-            return res;
+            var res = await _basketRepository.AddEntryAsync(Guid.Parse(userId), productId);
+            return res.ToString();
         }
-        public async Task<Guid> RemoveSingleProductAsync(Guid userId, string productId)
+        public async Task<string> RemoveSingleProductAsync(string userId, string productId)
         {
-            var res = await _basketRepository.RemoveSingleProductAsync(userId, productId);
-            return res;
+            var res = await _basketRepository.RemoveSingleProductAsync(Guid.Parse(userId), productId);
+            return res.ToString();
         }
 
-        public async Task<Guid> ClearBasketByUserIdAsync(Guid userId)
+        public async Task<string> ClearBasketByUserIdAsync(string userId)
         {
-            var res = await _basketRepository.DeleteEntriesByUserIdAsync(userId);
-            return res;
+            var res = await _basketRepository.DeleteEntriesByUserIdAsync(Guid.Parse(userId));
+            return res.ToString();
         }
 
 

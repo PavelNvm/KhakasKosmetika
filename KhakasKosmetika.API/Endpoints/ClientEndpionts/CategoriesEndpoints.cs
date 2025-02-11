@@ -3,7 +3,7 @@ using KhakasKosmetika.Core.Interfaces.Services;
 using KhakasKosmetika.Core.Models;
 using System.Linq;
 
-namespace KhakasKosmetika.API.Endpoints
+namespace KhakasKosmetika.API.Endpoints.ClientEndpionts
 {
     public static class CategoriesEndpoints
     {
@@ -26,7 +26,7 @@ namespace KhakasKosmetika.API.Endpoints
             string id
             )
         {
-            string result = await categoriesService.GetCategoryNameById( id );
+            string result = await categoriesService.GetCategoryNameById(id);
             return Results.Ok(result);
         }
         private static async Task<IResult> GetCategoryById(
@@ -35,7 +35,7 @@ namespace KhakasKosmetika.API.Endpoints
             )
         {
             var cat = await categoriesService.GetCategoryById(id);
-            CategoryResponse result = new CategoryResponse(cat.Id,cat.Name,cat.Depth);
+            CategoryResponse result = new CategoryResponse(cat.Id, cat.Name, cat.Depth);
             return Results.Ok(result);
         }
         private static async Task<IResult> GetCategoriesDepthZero(
@@ -73,13 +73,13 @@ namespace KhakasKosmetika.API.Endpoints
             List<CategoryResponse> result = new List<CategoryResponse>();
             foreach (Category cat in Categories.Where(o => o.SupergroupId == superGroupId).ToList())
             {
-                result.Add(new CategoryResponse(cat.Id, cat.Name, cat.Depth                
+                result.Add(new CategoryResponse(cat.Id, cat.Name, cat.Depth
             ));
             }
             return Results.Ok(result);
         }
 
-        
+
 
         private static async Task<IResult> GetAllCategories(
             IXMLReaderService ReaderService
@@ -112,7 +112,7 @@ namespace KhakasKosmetika.API.Endpoints
         private static List<CategoryResponseOld> GetSubcats(List<Category> list, List<Category> wholeList)
         {
             List<CategoryResponseOld> result = new List<CategoryResponseOld>();
-            foreach (Category c in list) 
+            foreach (Category c in list)
             {
                 if (c.Depth < 2)
                     result.Add(new CategoryResponseOld(c.Id, c.Name, c.Depth,

@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.API", "Khak
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.DataAccess", "KhakasKosmetika.DataAccess\KhakasKosmetika.DataAccess.csproj", "{EFF7F17C-3B8B-4D4A-92F3-CCF367369F7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhakasKosmetika.Application", "KhakasKosmetika.Application\KhakasKosmetika.Application.csproj", "{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhakasKosmetika.Application", "KhakasKosmetika.Application\KhakasKosmetika.Application.csproj", "{CAA72B42-5710-4BBB-8FBA-86385FFFF9BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

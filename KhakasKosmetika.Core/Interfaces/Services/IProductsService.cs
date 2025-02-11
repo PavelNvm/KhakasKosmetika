@@ -7,7 +7,7 @@ namespace KhakasKosmetika.Core.Interfaces.Services
         Task<string> AddFavouriteProductAsync(string userId, string productId);
         Task<string> CreateProductAsync(Product product);
         Task<string> DeleteFavouriteProductByProductIdAsync(string productId);
-        Task<string> DeleteFavouriteProductsByUserIdAsync(Guid userId);
+        Task<string> DeleteFavouriteProductsByUserIdAsync(string userId);
         Task<string> DeleteSingleEntryAsync(string userId, string productId);
         Task<List<Product>> GetFavouriteProductsAsync(string userId);
         Task<List<Product>> GetProductsByCategoryIdAsync(string id);

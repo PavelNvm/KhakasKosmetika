@@ -11,6 +11,7 @@ namespace KhakasKosmetika.Application.Services
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IImageRepository _imageRepository;
         public DataImportService(ICategoryRepository categoryRepository,
             IProductRepository productRepository)
         {

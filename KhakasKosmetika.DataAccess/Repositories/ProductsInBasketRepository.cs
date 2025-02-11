@@ -82,10 +82,5 @@ namespace KhakasKosmetika.DataAccess.Repositories
             await _context.SaveChangesAsync();
             return productId;
         }
-
-
-
-
-
     }
 }

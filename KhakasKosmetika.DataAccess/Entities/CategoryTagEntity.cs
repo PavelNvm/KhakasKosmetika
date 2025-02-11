@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace KhakasKosmetika.DataAccess.Entities
 {
-    public class FavouriteProductEntity
+    public class CategoryTagEntity
     {
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public string ProductId { get; set; } = "";
+        public Guid Guid { get; set; }
+        public string Name { get; set; } = "";
     }
 }
